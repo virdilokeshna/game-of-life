@@ -6,7 +6,7 @@ node{
     stage('cleanInstall'){
         withMaven(maven: 'maven') {
             echo '***************INITIALISING*************'
-            sh 'mvn -f pom.xml clean compile'
+            sh 'mvn -f pom.xml clean compile install'
         }
     }
     stage('run sonarscan'){
