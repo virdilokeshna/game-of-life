@@ -16,5 +16,37 @@ node{
                 sh 'mvn -f pom.xml sonar:sonar'
                 }
         }
+        stage('publish artifact'){
+             
+                echo 'push artifacts to repository'
+                script {
+                   pom = readMavenPom file: 'pom.xml'
+                  // echo pom.artifactId
+                   // filesByGlob = findFiles(glob: 'target/*.${pom.packaging}')
+                   // echo '${filesByGlob[0].name}'
+                  //  artifactPath = filesByGlob[0].path
+                  //  echo artifactPath
+
+                   nexusArtifactUploader artifacts: [
+                       [artifactId: pom.artifactId, 
+                       classifier: '', 
+                       file: 'pom.xml', 
+                       type: pom.packaging]
+                       /*,
+                       [artifactId: pom.artifactId, 
+                       classifier: '', 
+                       file: artifactPath, 
+                       type: 'jar']*/
+                       ], 
+                       credentialsId: 'cfd20180-24c0-42da-97d6-9597f9f2ca3b', 
+                       groupId: pom.groupId, 
+                       nexusUrl: '52.184.151.116:8081/nexus', 
+                       nexusVersion: 'nexus2', 
+                       protocol: 'http', 
+                       repository: 'GameofLife', 
+                       version: pom.version
+                    }   
+
+   }
    
 }
