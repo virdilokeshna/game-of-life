@@ -28,6 +28,13 @@
     </scm>
     <build>
         <plugins>
+        <!-- start For SonarQube By Lokeshna -->
+        <plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.7.0.1746</version>
+        </plugin>
+          <!-- End For SonarQube By Lokeshna -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
@@ -212,6 +219,21 @@
         <module>gameoflife-web</module>
     </modules>
     <profiles>
+    <!-- Start For SonarQube By Lokeshna -->
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- Optional URL to server. Default value is http://localhost:9000 -->
+                <sonar.host.url>
+                  <!--http://sonarqubeprac.eastus2.cloudapp.azure.com:9000/-->
+                  http://sonarqube001.eastus.cloudapp.azure.com/
+                </sonar.host.url>
+            </properties>
+        </profile>
+        <!-- End For SonarQube By Lokeshna -->
         <profile>
             <id>development</id>
             <activation>
