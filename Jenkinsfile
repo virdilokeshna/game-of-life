@@ -22,15 +22,31 @@ node{
             echo 'push artifacts to repository'
             script {
                    pom = readMavenPom file: 'pom.xml'
-                   pomBuild = readMavenPom file: pom.artifactId + '-build/pom.xml'
-                   pomCore = readMavenPom file: pom.artifactId + '-core/pom.xml'
-                   pomWeb = readMavenPom file: pom.artifactId + '-web/pom.xml'
+                   //pomBuild = readMavenPom file: pom.artifactId + '-build/pom.xml'
+                   //pomCore = readMavenPom file: pom.artifactId + '-core/pom.xml'
+                   //pomWeb = readMavenPom file: pom.artifactId + '-web/pom.xml'
                    //echo pom2.packaging
                    imodules = pom.modules
                     //echo imodules.size
                     for (String i : imodules) {
-                        echo (i);
-                    }
+                       // echo (i);
+                       pomModule = readMavenPom file: i + '/pom.xml'
+                    nexusArtifactUploader artifacts: [
+                       [artifactId: pomWeb.artifactId, 
+                       classifier: '', 
+                       file: pomModule.artifactId + '/pom.xml', 
+                       type: pomModule.packaging]
+                       ], 
+                       credentialsId: 'cfd20180-24c0-42da-97d6-9597f9f2ca3b', 
+                       groupId: pom.groupId, 
+                       nexusUrl: '20.44.100.76:8081/nexus', 
+                       nexusVersion: 'nexus2', 
+                       protocol: 'http', 
+                       repository: 'GameofLife', 
+                       version: pom.version
+                }   
+
+                    
                    /*for (i=0; i < imodules.size;i++){
                         echo imodules.get(i)
                    }*/
@@ -40,7 +56,7 @@ node{
                        classifier: '', 
                        file: 'pom.xml', 
                        type: pom.packaging]
-                       ,
+                       /*,
                        [artifactId: pomBuild.artifactId, 
                        classifier: '', 
                        file: pomBuild.artifactId + '/pom.xml', 
@@ -54,7 +70,7 @@ node{
                        [artifactId: pomWeb.artifactId, 
                        classifier: '', 
                        file: pomWeb.artifactId + '/pom.xml', 
-                       type: pomWeb.packaging]
+                       type: pomWeb.packaging]*/
                        ], 
                        credentialsId: 'cfd20180-24c0-42da-97d6-9597f9f2ca3b', 
                        groupId: pom.groupId, 
