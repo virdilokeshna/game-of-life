@@ -27,8 +27,8 @@ node{
                    // echo '${filesByGlob[0].name}'
                   //  artifactPath = filesByGlob[0].path
                   //  echo artifactPath
-                    echo 'file name : ' + '~/' + pom.artifactId + '-build/pom.xml'
-                    pom2 = readMavenPom file:'~/' + pom.artifactId + '-build/pom.xml'
+                    echo 'file name : ' + pom.artifactId + '-build/pom.xml'
+                    pom2 = readMavenPom file: pom.artifactId + '-build/pom.xml'
                     echo pom2.packaging
                    nexusArtifactUploader artifacts: [
                        [artifactId: pom.artifactId, 
