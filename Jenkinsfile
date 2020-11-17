@@ -27,7 +27,7 @@ node{
                    // echo '${filesByGlob[0].name}'
                   //  artifactPath = filesByGlob[0].path
                   //  echo artifactPath
-                    echo 'file name : ' + pom.artifactId + '-build/pom.xml'
+                    //echo 'file name : ' + pom.artifactId + '-build/pom.xml'
                     pom2 = readMavenPom file: pom.artifactId + '-build/pom.xml'
                     echo pom2.packaging
                    nexusArtifactUploader artifacts: [
@@ -35,11 +35,11 @@ node{
                        classifier: '', 
                        file: 'pom.xml', 
                        type: pom.packaging]
-                       /*,
-                       [artifactId: pom.artifactId + '-build', 
+                       ,
+                       [artifactId: pom2.artifactId, 
                        classifier: '', 
-                       file: '~/' + pom.artifactId + '-build/pom.xml', 
-                       type: 'jar']*/
+                       file: pom2.artifactId + '/pom.xml', 
+                       type: pom2.packaging]
                        ], 
                        credentialsId: 'cfd20180-24c0-42da-97d6-9597f9f2ca3b', 
                        groupId: pom.groupId, 
