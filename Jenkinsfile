@@ -22,24 +22,30 @@ node{
             echo 'push artifacts to repository'
             script {
                    pom = readMavenPom file: 'pom.xml'
-                  // echo pom.artifactId
-                   // filesByGlob = findFiles(glob: 'target/*.${pom.packaging}')
-                   // echo '${filesByGlob[0].name}'
-                  //  artifactPath = filesByGlob[0].path
-                  //  echo artifactPath
-                    //echo 'file name : ' + pom.artifactId + '-build/pom.xml'
-                    pom2 = readMavenPom file: pom.artifactId + '-build/pom.xml'
-                    echo pom2.packaging
+                   pomBuild = readMavenPom file: pom.artifactId + '-build/pom.xml'
+                   pomCore = readMavenPom file: pom.artifactId + '-core/pom.xml'
+                   pomWeb = readMavenPom file: pom.artifactId + '-web/pom.xml'
+                   //echo pom2.packaging
                    nexusArtifactUploader artifacts: [
                        [artifactId: pom.artifactId, 
                        classifier: '', 
                        file: 'pom.xml', 
                        type: pom.packaging]
                        ,
-                       [artifactId: pom2.artifactId, 
+                       [artifactId: pomBuild.artifactId, 
                        classifier: '', 
-                       file: pom2.artifactId + '/pom.xml', 
-                       type: pom2.packaging]
+                       file: pomBuild.artifactId + '/pom.xml', 
+                       type: pomBuild.packaging]
+                       ,
+                       [artifactId: pomCore.artifactId, 
+                       classifier: '', 
+                       file: pomCore.artifactId + '/pom.xml', 
+                       type: pomCore.packaging]
+                       ,
+                       [artifactId: pomWeb.artifactId, 
+                       classifier: '', 
+                       file: pomWeb.artifactId + '/pom.xml', 
+                       type: pomWeb.packaging]
                        ], 
                        credentialsId: 'cfd20180-24c0-42da-97d6-9597f9f2ca3b', 
                        groupId: pom.groupId, 
