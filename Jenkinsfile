@@ -32,7 +32,7 @@ node{
                        // echo (i);
                        pomModule = readMavenPom file: i + '/pom.xml'
                     nexusArtifactUploader artifacts: [
-                       [artifactId: pomWeb.artifactId, 
+                       [artifactId: pomModule.artifactId, 
                        classifier: '', 
                        file: pomModule.artifactId + '/pom.xml', 
                        type: pomModule.packaging]
