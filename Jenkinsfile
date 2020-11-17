@@ -33,11 +33,11 @@ node{
                        classifier: '', 
                        file: 'pom.xml', 
                        type: pom.packaging]
-                       /*,
-                       [artifactId: pom.artifactId, 
+                       ,
+                       [artifactId: pom.artifactId + '-build', 
                        classifier: '', 
-                       file: '~/' & pom.artifactId & '-build/pom.xml', 
-                       type: 'jar']*/
+                       file: '~/' + pom.artifactId + '-build/pom.xml', 
+                       type: 'jar']
                        ], 
                        credentialsId: 'cfd20180-24c0-42da-97d6-9597f9f2ca3b', 
                        groupId: pom.groupId, 
