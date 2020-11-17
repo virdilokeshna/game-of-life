@@ -27,10 +27,10 @@ node{
                    pomWeb = readMavenPom file: pom.artifactId + '-web/pom.xml'
                    //echo pom2.packaging
                    imodules = pom.modules
-                   echo imodules
-                  /* for (i=0; i> imodules.count;i++){
-
-                   }*/
+                    echo imodules.size
+                   for (i=0; i < imodules.size;i++){
+                        echo imodules.get(i)
+                   }
 
                    nexusArtifactUploader artifacts: [
                        [artifactId: pom.artifactId, 
