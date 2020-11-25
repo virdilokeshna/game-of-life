@@ -1,27 +1,34 @@
-node{
-    def mvn = tool 'maven'
-    
-    stage('GIT SCM'){
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'LV_git', url: 'https://github.com/virdilokeshna/game-of-life.git']]])
+pipeline{
+	agent any
+    tools{
+        maven 'maven'
     }
-    stage('cleanInstall'){
-        withMaven(maven: 'maven') {
-            echo '***************INITIALISING*************'
-            sh 'mvn -f pom.xml clean compile install'
-        }
-    }
-    stage('run sonarscan'){
-            withMaven(maven: 'maven'){
-            
-                echo '***************INITIALISING*************'
+	stages{
+        stage('GIT SCM'){
+            steps
+			{
+				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'LV_git', url: 'https://github.com/virdilokeshna/game-of-life.git']]])
+			}
+		}
+		stage('Build Project'){
+            steps
+			{
+				echo '***************INITIALISING*************'
+				sh 'mvn -f pom.xml clean compile install'
+			}
+		}
+		stage('Sonar Scan'){
+            steps
+			{
+				echo '***************INITIALISING*************'
                 sh 'mvn -f pom.xml sonar:sonar'
-                }
-    }
-    stage('publish artifact'){
-             
-            echo 'push artifacts to repository'
-            script {
-                   pom = readMavenPom file: 'pom.xml'
+			}
+		}
+		stage('Publish Artifact'){
+            steps
+			{
+				echo 'push artifacts to repository'
+				pom = readMavenPom file: 'pom.xml'
                    //pomBuild = readMavenPom file: pom.artifactId + '-build/pom.xml'
                    //pomCore = readMavenPom file: pom.artifactId + '-core/pom.xml'
                    //pomWeb = readMavenPom file: pom.artifactId + '-web/pom.xml'
@@ -79,8 +86,10 @@ node{
                        protocol: 'http', 
                        repository: 'GameofLife', 
                        version: pom.version
-                }   
-
-   }
-   
+			}
+		}
+		
+	}
 }
+			
+   
