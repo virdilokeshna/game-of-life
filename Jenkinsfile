@@ -80,7 +80,7 @@ pipeline{
                        file: pomWeb.artifactId + '/pom.xml', 
                        type: pomWeb.packaging]*/
                        ], 
-                       credentialsId: 'cfd20180-24c0-42da-97d6-9597f9f2ca3b', 
+                       credentialsId: 'Nexus_ID',//'cfd20180-24c0-42da-97d6-9597f9f2ca3b', 
                        groupId: pom.groupId, 
                        nexusUrl: '104.209.135.134:8081/nexus', 
                        nexusVersion: 'nexus2', 
