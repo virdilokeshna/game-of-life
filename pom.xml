@@ -196,7 +196,7 @@
     <distributionManagement>
         <snapshotRepository>
             <id>GameofLife</id>
-            <url>http://52.184.151.116:8081/nexus/content/repositories/GameofLife</url>
+            <url>http://104.209.135.134:8081/nexus/content/repositories/GameofLife</url>
         </snapshotRepository>
     </distributionManagement>
      <!-- End Nexus Settings By Lokeshna -->

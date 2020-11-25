@@ -1,7 +1,7 @@
 node{
     def mvn = tool 'maven'
     
-    stage('GIT SCM'){
+    stage('GmvnIT SCM'){
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'LV_git', url: 'https://github.com/virdilokeshna/game-of-life.git']]])
     }
     stage('cleanInstall'){
@@ -31,7 +31,7 @@ node{
                     for (String i : imodules) {
                        // echo (i);
                        pomModule = readMavenPom file: i + '/pom.xml'
-                    nexusArtifactUploader artifacts: [
+                       nexusArtifactUploader artifacts: [
                        [artifactId: pomModule.artifactId, 
                        classifier: '', 
                        file: pomModule.artifactId + '/pom.xml', 
@@ -39,7 +39,7 @@ node{
                        ], 
                        credentialsId: 'cfd20180-24c0-42da-97d6-9597f9f2ca3b', 
                        groupId: pom.groupId, 
-                       nexusUrl: '20.44.100.76:8081/nexus', 
+                       nexusUrl: '104.209.135.134:8081/nexus', 
                        nexusVersion: 'nexus2', 
                        protocol: 'http', 
                        repository: 'GameofLife', 
@@ -74,7 +74,7 @@ node{
                        ], 
                        credentialsId: 'cfd20180-24c0-42da-97d6-9597f9f2ca3b', 
                        groupId: pom.groupId, 
-                       nexusUrl: '20.44.100.76:8081/nexus', 
+                       nexusUrl: '104.209.135.134:8081/nexus', 
                        nexusVersion: 'nexus2', 
                        protocol: 'http', 
                        repository: 'GameofLife', 
