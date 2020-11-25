@@ -34,7 +34,7 @@ pipeline{
                    //pomCore = readMavenPom file: pom.artifactId + '-core/pom.xml'
                    //pomWeb = readMavenPom file: pom.artifactId + '-web/pom.xml'
                    //echo pom2.packaging
-                   imodules = pom.modules
+                  /* imodules = pom.modules
                     //echo imodules.size
                     for (String i : imodules) {
                        // echo (i);
@@ -52,7 +52,7 @@ pipeline{
                        protocol: 'http', 
                        repository: 'GameofLife', 
                        version: pom.version
-                }   
+                }   */
 
                     
                    /*for (i=0; i < imodules.size;i++){
