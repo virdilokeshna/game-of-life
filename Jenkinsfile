@@ -28,7 +28,8 @@ pipeline{
             steps
 			{
 				echo 'push artifacts to repository'
-				pom = readMavenPom file: 'pom.xml'
+				script {
+                    pom = readMavenPom file: 'pom.xml'
                    //pomBuild = readMavenPom file: pom.artifactId + '-build/pom.xml'
                    //pomCore = readMavenPom file: pom.artifactId + '-core/pom.xml'
                    //pomWeb = readMavenPom file: pom.artifactId + '-web/pom.xml'
@@ -87,6 +88,7 @@ pipeline{
                        repository: 'GameofLife', 
                        version: pom.version
 			}
+            }
 		}
 		
 	}
