@@ -1,7 +1,7 @@
 node{
     def mvn = tool 'maven'
     
-    stage('GmvnIT SCM'){
+    stage('GIT SCM'){
         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'LV_git', url: 'https://github.com/virdilokeshna/game-of-life.git']]])
     }
     stage('cleanInstall'){
