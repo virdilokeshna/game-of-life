@@ -7,7 +7,7 @@ pipeline{
         stage('GIT SCM'){
             steps
 			{
-				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'LV_git', url: 'https://github.com/virdilokeshna/game-of-life.git']]])
+				checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'LV_GIT', url: 'https://github.com/virdilokeshna/game-of-life.git']]])
 			}
 		}
 		stage('Build Project'){
